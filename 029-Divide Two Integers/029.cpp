@@ -31,8 +31,7 @@ public:
         long long temp = 0;
         while (absdividend > temp)
         {
-            temp = absdivisor;
-            temp = temp << i;
+            temp = absdivisor << i;
             ++i;
             data.push_back(temp);
         }
