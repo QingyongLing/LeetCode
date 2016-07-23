@@ -41,7 +41,7 @@ public:
             {
                 vector<string> temp;
                 for (auto &c : s.second)
-                    temp.push_back(move(old[c]));
+                    temp.push_back(old[c]);
                 result.push_back(temp);
             }
         }
@@ -85,7 +85,41 @@ public:
             {
                 vector<string> temp;
                 for (auto &c : s.second)
-                    temp.push_back(move(strs[c]));
+                    temp.push_back(strs[c]);
+                result.push_back(temp);
+            }
+        }
+        return result;
+    }
+    //一个狗血的方法
+    vector<vector<string>> groupAnagrams3(vector<string>& strs) {
+        vector<vector<string>> result;
+        if (strs.size() == 1)
+        {
+            result.push_back(strs);
+            return result;
+        }
+        else
+        {
+            auto fun_hash = [](const string& str)->size_t
+            {
+                size_t temp = 0;
+                for (auto &c : str)
+                {
+                    temp += c*c*c*c;
+                }
+                return temp;
+            };
+            map<size_t, vector<int>> m;
+            for (int i = 0; i < strs.size(); ++i)
+            {
+                m[fun_hash(strs[i])].push_back(i);
+            }
+            for (auto &s : m)
+            {
+                vector<string> temp;
+                for (auto &c : s.second)
+                    temp.push_back(strs[c]);
                 result.push_back(temp);
             }
         }
