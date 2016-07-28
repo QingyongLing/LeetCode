@@ -18,8 +18,7 @@ public:
         }
         else
         {
-            int tempn = n > 0 ? n : -n;
-            fun(x, result, tempn);
+            fun(x, result, abs(n));
         }     
         return n>0 ? result : 1.0/result;
     }
