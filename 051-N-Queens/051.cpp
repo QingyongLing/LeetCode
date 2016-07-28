@@ -7,7 +7,7 @@
 #include <functional>
 using namespace std;
 /*
-The n-queens puzzle is the problem of placing n queens on an n¡Án chessboard such that no two queens attack each other.
+The n-queens puzzle is the problem of placing n queens on an nï¿½ï¿½n chessboard such that no two queens attack each other.
 Given an integer n, return all distinct solutions to the n-queens puzzle.
 Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
 For example,
@@ -40,7 +40,10 @@ public:
     void placeQueens(vector<vector<string>>& result, vector<string>& position, vector<int> &QueensCol, int row, int n)
     {
         if (row == n)
+        {
             result.push_back(position);
+            return;
+        }
         for (int i = 0; i < n; ++i)
         {
             bool Noconflict = true;
@@ -82,7 +85,10 @@ public:
     void placeQueens2(vector<vector<int>>& QueensCols, vector<int> &QueensCol,int row,int n)
     {
         if (row == n)
+        {
             QueensCols.push_back(QueensCol);
+            return;
+        }
         for (int i = 0; i < n; ++i)
         {           
             bool Noconflict = true;
@@ -115,7 +121,10 @@ public:
     void placeQueens3(vector<vector<string>>& result, vector<string>& position, int row, int n)
     {
         if (row == n)
+        {
             result.push_back(position);
+            return;
+        }
         for (int i = 0; i < n; ++i)
         {
             if (Noconflict3(position, row, i, n))
