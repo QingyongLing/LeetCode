@@ -1,10 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <set>
-#include <string>
-#include <map>
-#include <functional>
 using namespace std;
 /*
 Given a collection of intervals, merge all overlapping intervals.
