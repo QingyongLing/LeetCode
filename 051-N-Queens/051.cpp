@@ -29,11 +29,45 @@ public:
             return result;
         string str(n, '.');
         vector<string> position(n, str);
-        vector<int> QueensCol;
-        placeQueens(result, position, QueensCol, 0, n);
+        //false is just comment
+        bool QueensCol[100] = { false };
+        bool lefttop[100] = { false };
+        bool righttop[100] = { false };
+        placeQueens(result, position, QueensCol, lefttop, righttop, 0, n);
         return result;
     }
-    void placeQueens(vector<vector<string>>& result, vector<string>& position, vector<int> &QueensCol, int row, int n)
+    void placeQueens(vector<vector<string>>& result, vector<string>& position, bool* QueensCol,
+        bool* lefttop, bool* righttop, int row, int n)
+    {
+        if (row == n)
+        {
+            result.push_back(position);
+            return;
+        }
+        for (int i = 0; i < n; ++i)
+        {
+            if (!(QueensCol[i] || lefttop[n - 1 - i + row] || righttop[i + row]))
+            {
+                position[row][i] = 'Q';
+                QueensCol[i] = lefttop[n - 1 - i + row] = righttop[i + row] = true;
+                placeQueens(result, position, QueensCol, lefttop, righttop, row + 1, n);
+                position[row][i] = '.';
+                QueensCol[i] = lefttop[n - 1 - i + row] = righttop[i + row] = false;
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens2(int n) {
+        vector<vector<string>> result;
+        if (n == 0 || n == 2)
+            return result;
+        string str(n, '.');
+        vector<string> position(n, str);
+        vector<int> QueensCol;
+        placeQueens2(result, position, QueensCol, 0, n);
+        return result;
+    }
+    void placeQueens2(vector<vector<string>>& result, vector<string>& position, vector<int> &QueensCol, int row, int n)
     {
         if (row == n)
         {
@@ -53,53 +87,8 @@ public:
             {
                 position[row][i] = 'Q';
                 QueensCol.push_back(i);
-                placeQueens(result, position, QueensCol, row + 1, n);
+                placeQueens2(result, position, QueensCol, row + 1, n);
                 position[row][i] = '.';
-                QueensCol.pop_back();
-            }
-        }
-    }
-
-    vector<vector<string>> solveNQueens2(int n) {       
-        if (n == 0)
-            return vector<vector<string>>();         
-        vector<int> QueensCol;
-        vector<vector<int>> QueensCols;
-        placeQueens2(QueensCols,QueensCol, 0, n);
-        string str(n, '.');
-        vector<string> position(n, str);
-        vector<vector<string>> result(QueensCols.size(), position);
-        for (int i = 0; i < QueensCols.size(); ++i)
-        {
-            for (int j = 0; j < n; ++j)
-            {
-                result[i][j][QueensCols[i][j]] = 'Q';
-            }
-        }
-        return result;
-    }
-    void placeQueens2(vector<vector<int>>& QueensCols, vector<int> &QueensCol,int row,int n)
-    {
-        if (row == n)
-        {
-            QueensCols.push_back(QueensCol);
-            return;
-        }
-        for (int i = 0; i < n; ++i)
-        {           
-            bool Noconflict = true;
-            for (int j = 0; j < QueensCol.size(); ++j)
-            {
-                if (i == QueensCol[j] || row - j == abs(i - QueensCol[j]))
-                {
-                    Noconflict = false;
-                    break;
-                }
-            }
-            if (Noconflict)
-            {               
-                QueensCol.push_back(i);
-                placeQueens2(QueensCols, QueensCol , row + 1, n);
                 QueensCol.pop_back();
             }
         }
