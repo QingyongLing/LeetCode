@@ -19,11 +19,10 @@ public:
     bool Jump(vector<int>& nums, int pos)
     {
         if (pos >= nums.size() - 1)
-            return true;
-        int ability = nums[pos];
+            return true;       
         int temp = 0;
         int nextpos = pos;
-        for (int i = 1; i <= ability; ++i)
+        for (int i = 1; i <= nums[pos]; ++i)
         {
             if (nums[pos + i] + i > temp)
             {
@@ -36,6 +35,18 @@ public:
         else
             return Jump(nums, nextpos);
     }
+
+    //copy from leetcode editorial Solution
+    bool canJump2(vector<int>& nums) {
+        int lastPos = nums.size() - 1;
+        for (int i = nums.size() - 1; i >= 0; i--) {
+            if (i + nums[i] >= lastPos) {
+                lastPos = i;
+            }
+        }
+        return lastPos == 0;
+    }
+
 };
 int main()
 {  
