@@ -105,12 +105,18 @@ for (int i = 0; i < words.size(); ++i)
         }
         return result;
 ```
-首先分类，按照每个`word`的长度相当于分成了多个链表     
+首先分类，按照每个`word`的长度相当于分成了多个链表，也就是：
+[0,subsize-1]->[subsize,2*subsize-1]->.....       
+[1,subsize]->[subsize+1,2*subsize]->.....       
+[2,subsize+1]->[subsize+2,2*subsize+1]->.....       
+....
+[subsize-1,2*subsize-2]->[2*subsize-1,3*subsize-2]->.....       
+把这几个链表都遍历一遍
 ```cpp
 int left = i, count = 0;
 map<size_t, int> legal;
 ```
-两个指针中左指针为left，右指针为j，往右边移动，count为满足条件的数目，legal用来统计次数      
+两个指针中左指针为left，右指针为j，往右边移动，count为满足条件的数目，legal用来统计次数，left是符合条件的起始点，j是遍历的经过点，count是满足的总数，legal代表每个子字符串符合的个数      
 ```cpp
 auto iter = hash_table_words.find(hash_table_s[j]);
 if (iter == hash_table_words.end())
@@ -141,5 +147,5 @@ if (count == words.size())
     left += subsize;
 }
 ```
-满足条件时，比较是否超出次数限制，一旦超出，把左指针右移，直到满足限制      
-判断count是否符合要求，左指针右移一个位置（右指针一直在右移）          
+满足条件时，比较是否超出子字符串的次数限制，一旦超出，把左指针右移，直到该字符串的计数减1，也就是抛弃了原来left到第一个该字符串的那一部分        
+判断count是否符合要求，如果符合要求，左指针右移一个位置（右指针一直在右移），再减去刚刚原来那个left的计数值          
