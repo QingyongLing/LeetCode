@@ -51,7 +51,7 @@ private:
             }
             ListNode* right = temp->next;
             temp->next = NULL;
-            head=sort(head, left);
+            head = sort(head, left);
             right = sort(right, len - left);
             return merge(head, right);
         }
