@@ -39,10 +39,6 @@ public:
                 result.push_back(sub.top()->val);
                 sub.pop();
             }
-            while (!sub.empty() && sub.top()->right == NULL) {
-                result.push_back(sub.top()->val);
-                sub.pop();
-            }
             if (!sub.empty()) {
                 temp = sub.top()->right;
                 result.push_back(sub.top()->val);
