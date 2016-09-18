@@ -1,7 +1,4 @@
 ﻿#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 #include <list>
 using namespace std;
 /*
