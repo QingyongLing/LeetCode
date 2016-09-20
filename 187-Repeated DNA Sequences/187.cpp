@@ -37,21 +37,19 @@ public:
     vector<string> findRepeatedDnaSequences2(string s) {
         vector<string> vec;
         if (s.size() < 10) return vec;
-        unordered_map<int, pair<int, int>> map;
+        unordered_map<int, int> map;
         int bithash = 0, num = 9, index = 0;
         while (num--) {
             bithash = (bithash << 3) | (s[index++] & 7);
         }
         for (int i = 9; i < s.size(); ++i) {
-            bithash = (bithash & 0x7ffffff) << 3;
-            bithash |= (s[i] & 7);
+            bithash = ((bithash & 0x7ffffff) << 3)|(s[i] & 7);
             auto iter = map.find(bithash);
             if (iter == map.end()) {
-                map.insert(make_pair(bithash, make_pair(i, 1)));
+                map.insert(make_pair(bithash, 1));
             }
             else {
-                int num = ++iter->second.second;
-                if (num == 2)
+                if (++iter->second==2)
                     vec.push_back(string(s.begin() + i - 9, s.begin() + i + 1));
             }
         }
