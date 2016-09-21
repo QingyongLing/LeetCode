@@ -16,6 +16,22 @@ public:
             if (isprime(i))++result;
         return result;
     }
+    //From:https://discuss.leetcode.com/topic/50340/from-700ms-to-300ms-to-200ms-to-100ms-to-28ms-to-16ms
+    int countPrimes(int n) {
+        if(n < 3) return 0;
+        bool *numbers = new bool[n];
+        memset(numbers, 1, sizeof(bool)*n);
+        int count = n/2;
+        for(int i = 3; i <= sqrt(n); i += 2)
+            if(numbers[i])
+            for(int j = i*i, k = i<<1; j < n; j += k)
+            {  
+                if(numbers[j]) count--;
+                   numbers[j] = false;
+            }
+        delete[] numbers;
+        return count;
+    }
 private:
     bool isprime(int n) {
         if (n == 1) return false;
