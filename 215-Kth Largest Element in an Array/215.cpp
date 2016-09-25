@@ -35,15 +35,39 @@ public:
             return nums[k - 1];
         }
     }
+    int findKthLargest3(vector<int>& nums, int k) {
+        return KthLagest(nums, 0, nums.size() - 1, k - 1);
+    }
 private:
     int KthLagest(vector<int>& nums, int lo, int hi, int k) {
-
+        if (lo == hi&&lo == k)return nums[k];
+        if (hi - lo == 1) {
+            if (nums[lo] < nums[hi]) swap(nums[lo], nums[hi]);
+            return nums[k];
+        }
+        swap(nums[lo], nums[lo + (hi - lo) / 2]);
+        int left = lo + 1, right = hi;
+        while (left < right) {
+            while (left <= right&&nums[left] >= nums[lo])
+                ++left;
+            while (left <= right&&nums[right] < nums[lo])
+                --right;
+            if (left < right)
+                swap(nums[left], nums[right]);
+        }
+        swap(nums[lo], nums[right]);
+        if (k == right)
+            return nums[k];
+        else if (k < right)
+            return KthLagest(nums, lo, right - 1, k);
+        else
+            return KthLagest(nums, right + 1, hi, k);
     }
 };
 int main() {
     Solution s; 
-    vector<int> vec = { 3,2,1,5,6,4 };
-    cout << s.findKthLargest2(vec, 5) << endl;
+    vector<int> vec = { 3,1,2,4 };
+    cout << s.findKthLargest3(vec, 2) << endl;
     system("pause");
     return 0;
 }
