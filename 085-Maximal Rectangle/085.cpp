@@ -76,20 +76,6 @@ public:
         }
         return maximal;
     }
-
-    int maximalRectangle2(vector<vector<char>>& matrix) {
-        if (matrix.empty())
-            return 0;
-        vector<vector<pair<int, int>>> area;
-        int maximal = 0;
-        for (int i = 0; i < matrix.size(); ++i)
-        {
-            for (int j = 0; j < matrix[0].size(); ++j)
-            {
-
-            }
-        }
-    }
 };
 int main()
 {  
