@@ -100,5 +100,5 @@ int main()
     cout << s.lengthOfLongestSubstring3("pwwkew");
     cout << s.lengthOfLongestSubstring3("dvdf");
     cout << s.lengthOfLongestSubstring3("abba");
-    system("pause");
+    return 0;
 }
