@@ -26,20 +26,15 @@ class NumMatrix {
 public:
     NumMatrix(vector<vector<int>> &matrix) {
         if (matrix.empty()) return;
-        sum = vector<vector<int>>(matrix.size(), vector<int>(matrix[0].size() + 1, 0));
+        sum = vector<vector<int>>(matrix.size() + 1, vector<int>(matrix[0].size() + 1, 0));
         for (int i = 0; i < matrix.size(); ++i) {
-            sum[i][0] = 0;
             for (int j = 0; j < matrix[0].size(); ++j) {
-                sum[i][j + 1] = sum[i][j] + matrix[i][j];
+                sum[i + 1][j + 1] = sum[i + 1][j] + sum[i][j + 1] - sum[i][j] + matrix[i][j];
             }
         }
     }
     int sumRegion(int row1, int col1, int row2, int col2) {
-        int num = 0;
-        for (int i = row1; i <= row2; ++i) {
-            num += sum[i][col2 + 1] - sum[i][col1];
-        }
-        return num;
+        return sum[row2 + 1][col2 + 1] - sum[row2 + 1][col1] - sum[row1][col2 + 1] + sum[row1][col1];
     }
 private:
     vector<vector<int>> sum;
