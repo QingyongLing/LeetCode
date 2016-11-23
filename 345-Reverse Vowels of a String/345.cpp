@@ -18,8 +18,7 @@ public:
         if (s.length() < 2) return s;
         string vowels("aeiouAEIOU");
         int lo = 0, hi = s.length() - 1;
-        while (lo < hi)
-        {
+        while (lo < hi){
             while (vowels.find(s[lo]) == string::npos && lo<hi) lo++;
             while (vowels.find(s[hi]) == string::npos && lo<hi) hi--;
             swap(s[lo++], s[hi--]);
