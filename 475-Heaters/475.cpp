@@ -30,7 +30,7 @@ class Solution {
 public:
     int findRadius(vector<int>& houses, vector<int>& heaters) {
         sort(heaters.begin(), heaters.end());
-        vector<int> len(houses.size(), INT_MAX);
+        vector<int> len(houses.size());
         for (int i = 0; i < houses.size();++i) {
             auto iter = lower_bound(heaters.begin(), heaters.end(), houses[i]);
             if (iter == heaters.end())
