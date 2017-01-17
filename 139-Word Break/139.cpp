@@ -22,7 +22,7 @@ public:
         vector<int> flag(s.size() + 1, 0);
         unordered_set<string> dict(wordDict.begin(), wordDict.end());
         unordered_set<int> len;
-        for (auto &s : wordDict)len.insert(s.size());
+        for (auto &c : wordDict)len.insert(c.size());
         flag[0] = 1;
         for (int i = 0; i < s.size(); ++i) {
             if (flag[i]) {
