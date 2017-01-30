@@ -20,6 +20,7 @@ Special thanks to @jeantimex for adding this problem and creating all test cases
 
 class Solution {
 public:
+    //From: https://discuss.leetcode.com/topic/29872/0ms-concise-c-solution-perfectly-handles-the-follow-up-and-leading-0s
     bool isAdditiveNumber(string num) {
         for (int i = 1; i <= num.size() / 2; ++i){
             for (int j = 1; j <= (num.size() - i) / 2; ++j){
